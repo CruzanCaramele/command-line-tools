@@ -1,7 +1,7 @@
 dbpackup
 ========
 
-CLI tool for creating backups for databases either locally or aws-S3 buckets (currently supports postgres)
+CLI tool for creating backups for databases either locally or amazon aws-S3 buckets (currently supports postgres)
 
 
 ####Preparing the Development
