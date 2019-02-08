@@ -9,13 +9,13 @@ def make_api_url(args):
 		print('Error: OWM API KEY NOT FOUND\
 		      EXPORT API KEY AS ENV VARIABLE')
 		sys.exit(1)
-		api_url = f"https://api.openweathermap.org/data/2.5/weather?q={args.city},{args.country}&appid={api_key}"
-		return api_url
+	api_url = f"https://api.openweathermap.org/data/2.5/weather?q={args.city},{args.country}&appid={api_key}"
+	return api_url
 
 def create_parser():
 	parser = ArgumentParser(description='Get the current weather information for your city')
 	parser.add_argument('city', help='name of city to get weather for')
-	parser.add_argument('country', help='country code of the city belongs to')
+	parser.add_argument('country', help='country code the city belongs to')
 	return parser
 
 
