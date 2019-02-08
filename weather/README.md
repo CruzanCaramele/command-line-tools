@@ -1,0 +1,1 @@
+Weather via the command line. Uses the openweathermap.org API to retrieve the weather information of cities.
