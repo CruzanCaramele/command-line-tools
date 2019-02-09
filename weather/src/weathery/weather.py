@@ -2,10 +2,10 @@ import os
 import sys
 import json
 import requests
-from tabulate import tabulate
 from argparse import ArgumentParser
+from veryprettytable import VeryPrettyTable
 
-weather_state = []
+
 HEADERS = ['City', 'Temperature', 'Condition', 'Details']
 
 def make_api_url(args):
@@ -23,6 +23,7 @@ def create_parser():
 	return parser
 
 def main():
+	x = VeryPrettyTable()
 	args = create_parser().parse_args()
 	url = make_api_url(args)
 	res =  requests.get(url)
@@ -30,17 +31,10 @@ def main():
 		print(f'Error reaching the weather provider: {res.status_code}')
 		sys.exit(1)
 	data = res.json()
-	#print(f'{json.dumps(data, sort_keys=True, indent=4)}')
-	weather_state.append(f'{data["name"]}')
-	weather_state.append(f'{data["main"]["temp"]}') 
-	weather_state.append(f'{data["weather"][0]["main"]}')
-	weather_state.append(f'{data["weather"][0]["description"]}')
-	# print(weather_state)
-	# print(tabulate(weather_state, headers=HEADERS))
+	x.field_names = ['City', 'Temperature', 'Forcast', 'Details']
+	x.add_row([data["name"],data["main"]["temp"],data["weather"][0]["main"],data["weather"][0]["main"]])
 
-	print(tabulate({"City": weather_state[0], "Temperature": weather_state[1]}, headers="keys"))
-	
-
-
+	print(x)
+			
 if __name__ == '__main__':
 	main()
