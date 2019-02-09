@@ -10,7 +10,7 @@ setup(
 	long_description=readme,
 	author='Hamza',
 	author_email='letters2hamza@gmail.com',
-	install_requires=['requests'],
+	install_requires=['requests', 'veryprettytable'],
 	packages=find_packages('src'),
 	package_dir={'': 'src'},
 	entry_points={
