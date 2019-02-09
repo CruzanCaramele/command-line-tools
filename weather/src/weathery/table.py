@@ -8,4 +8,3 @@ def table(data):
 	x.field_names = HEADERS
 	x.add_row([data["name"],data["main"]["temp"],data["weather"][0]["main"],data["weather"][0]["main"]])
 	return x
-
