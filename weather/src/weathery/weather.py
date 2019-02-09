@@ -2,11 +2,9 @@ import os
 import sys
 import json
 import requests
+from weathery import table
 from argparse import ArgumentParser
 from veryprettytable import VeryPrettyTable
-
-
-HEADERS = ['City', 'Temperature', 'Condition', 'Details']
 
 def make_api_url(args):
 	api_key = os.getenv('OWM_API_KEY')
@@ -23,7 +21,6 @@ def create_parser():
 	return parser
 
 def main():
-	x = VeryPrettyTable()
 	args = create_parser().parse_args()
 	url = make_api_url(args)
 	res =  requests.get(url)
@@ -31,10 +28,8 @@ def main():
 		print(f'Error reaching the weather provider: {res.status_code}')
 		sys.exit(1)
 	data = res.json()
-	x.field_names = ['City', 'Temperature', 'Forcast', 'Details']
-	x.add_row([data["name"],data["main"]["temp"],data["weather"][0]["main"],data["weather"][0]["main"]])
-
-	print(x)
+	weather_state = table.table(data)
+	print(weather_state)
 			
 if __name__ == '__main__':
 	main()
