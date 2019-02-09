@@ -8,7 +8,7 @@ Commands can be run by themselves, or stacked.
 
 Sample Usage:
 
-    hamzz: weathery (master) $ sudo python3.6 setup.py install 
+    hamza: weathery (master) $ sudo python3.6 setup.py install 
     hamza: weathery (master) $ weathery -h
     usage: weathery [-h] city country
     Get the current weather information for your city
