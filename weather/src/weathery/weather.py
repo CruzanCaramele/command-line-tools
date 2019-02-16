@@ -23,10 +23,27 @@ def create_parser():
 def main():
 	args = create_parser().parse_args()
 	url = make_api_url(args)
-	res =  requests.get(url)
-	if res.status_code != 200:
-		print(f'Error reaching the weather provider: {res.status_code}')
+	try:
+		res =  requests.get(url)
+	except requests.ConnectionError as e:
+		print("OOPS!! Connection Error. Make sure you are connected to Internet. Technical Details given below.\n")
+		print(str(e))
 		sys.exit(1)
+	except requests.Timeout as e:
+		print("OOPS!! Timeout Error")
+		print(str(e))
+		sys.exit(1)
+	except requests.RequestException as e:
+		print("OOPS!! General Error")
+		print(str(e))
+		sys.exit(1)
+	except KeyboardInterrupt:
+		print("The program has been closed")
+		
+	# if res.status_code != 200:
+	# 	print(f'Error reaching the weather provider: {res.status_code} ')
+	# 	sys.exit(1)
+
 	data = res.json()
 	weather_state = table.table(data)
 	print(weather_state)
